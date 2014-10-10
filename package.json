@@ -1,0 +1,36 @@
+{
+  "name": "ssp",
+  "version": "0.0.1",
+  "description": "Smiley Secure Protocol, node.js implementation",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/soulman-is-good/node-ssp.git"
+  },
+  "keywords": [
+    "nv10",
+    "nv10usb",
+    "ssp",
+    "smiley",
+    "secure",
+    "protocol",
+    "cash",
+    "acceptor"
+  ],
+  "author": "Maxim Savin <soulman.is.good@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soulman-is-good/node-ssp/issues"
+  },
+  "homepage": "https://github.com/soulman-is-good/node-ssp",
+  "dependencies": {
+    "crc": "^3.0.0",
+    "serialport": "^1.4.6"
+  }
+}

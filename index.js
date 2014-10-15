@@ -29,7 +29,7 @@ var SSPInstance = Class.extend({
       parser: serialport.parsers.raw
     }, false);
 
-    if (fs.readdirSync('./commands').map(function (item) {
+    if (fs.readdirSync(__dirname + '/commands').map(function (item) {
       return item.replace(/\..+$/, '');
     }).indexOf(options.type) === -1) {
       throw new Error("Unknown device type '" + options.type + "'");

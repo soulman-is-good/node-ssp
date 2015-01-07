@@ -10,6 +10,7 @@ var SSPInstance = Class.extend({
   port: null,
   commands: null,
   initialize: function (opts) {
+    var self = this;
     var options = this.options = {
       device: opts.device || "/dev/ttyUSB0",
       baudrate: opts.baudrate || 9600,
@@ -28,7 +29,9 @@ var SSPInstance = Class.extend({
       parity: options.parity,
       parser: serialport.parsers.raw
     }, false);
-
+    this.port.on('error', function (err) {
+      self.emit('error', err);
+    });
     if (fs.readdirSync(__dirname + '/commands').map(function (item) {
       return item.replace(/\..+$/, '');
     }).indexOf(options.type) === -1) {

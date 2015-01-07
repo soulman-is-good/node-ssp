@@ -8,7 +8,7 @@ Written by Innovative Technologies SSP manual
 
 Maintained devices:
 * NV10
-
+* NV9 //preparing
 
 Installation
 -------------
@@ -87,3 +87,24 @@ ssp.init(function(){
   });
 });
 ```
+
+Properties
+------------
+
+* **commands** - Generated on creation command-interface for sending command or stack of commands to device
+
+Methods
+----------
+
+* **init([enableOnInit],[callback])** - Initializes device, in case of an error emits _error_ event. Can take boolean as a first argument which defines whether enable or not a device on init, second argument is callback, which has possible exception;
+* **enable([callback])** - Enables device. Callback may be as an argument to supply asynchrony
+* **disable([callback])** - Disables device. Callback may be as an argument to supply asynchrony
+* **commands.{command}** - device`s commands binds as a methods to _commands_ interface and can be chained in execution stack like _ssp.commands.enable().display_off().event_ack()_ and then executed via _exec_ method
+* **commands.exec([command], [callback])** - executes command stack. Method has optional _command_ parameter which if passed made to the end of command stack, and a callback.
+
+Events
+------------------
+
+* **ready** - emits when device is ready for data.
+* **error** - emits when error occures. Has error object as an argument of a callback
+* other events supported by SSP protocol like **slave_reset**, **read_note**, **credit_note**, **note_rejecting**, **note_stacking**, **disabled** et.c.

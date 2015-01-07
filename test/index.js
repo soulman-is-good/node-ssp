@@ -11,7 +11,7 @@ var notes = {
 };
 ssp = new ssp({
   device: '/dev/ttyACM0', //device address
-  type: "nv10usb", //device type
+  type: "nv9usb", //device type
   currencies:[0,1,1,1,1,0] //currencies types acceptable. Here all but 200KZT
 });
 

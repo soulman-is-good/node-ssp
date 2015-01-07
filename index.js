@@ -29,6 +29,9 @@ var SSPInstance = Class.extend({
       parity: options.parity,
       parser: serialport.parsers.raw
     }, false);
+    this.port.on('close', function () {
+      self.emit('close');
+    });
     this.port.on('error', function (err) {
       self.emit('error', err);
     });

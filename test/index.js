@@ -10,8 +10,8 @@ var notes = {
   6:"10000KZT"
 };
 ssp = new ssp({
-  device: '/dev/ttyACM0', //device address
-  type: "nv9usb", //device type
+//  device: '/dev/ttyACM0', //device address
+  type: "nv10usb", //device type
   currencies:[0,1,1,1,1,0] //currencies types acceptable. Here all but 200KZT
 });
 
@@ -25,7 +25,7 @@ ssp.init(function(){
       console.log("GOT",notes[note]);
       if(note === 3) {
         // suddenly we decided that we don't need 1000 KZT
-        ssp.commands.exec("reject_banknote");
+          ssp.commands.exec("reject_banknote");
       }
     }
   });
@@ -64,4 +64,19 @@ ssp.init(function(){
   ssp.on("error", function(err){
     console.log(err.code, err.message);
   });
+});
+
+process.on('SIGINT', function () {
+  process.exit(0);
+});
+
+process.on('uncaughtException', function (err) {
+  console.log(err.stack);
+  setTimeout(function () {
+    process.exit(1);
+  }, 500);
+});
+
+process.on('exit', function () {
+  ssp.disable();
 });

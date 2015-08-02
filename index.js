@@ -121,7 +121,12 @@ var SSPInstance = Class.extend({
           }
           port.on('data', function (buffer) {
             if (buffer[0] === 0x7F) {
-              var data = buffer.toJSON().splice(3, buffer[2]);
+              var data = buffer.toJSON()
+              if (data.data) {
+                data = data.data.splice(3, buffer[2]);
+              } else {
+                data = data.splice(3, buffer[2]);
+              }
               var error = new Error("New error");
               error.code = data[0];
               switch (data[0]) {

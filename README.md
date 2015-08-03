@@ -109,3 +109,10 @@ Events
 * **close** - emits on device closes. e.g. disconnected
 * **error** - emits when error occures. Has error object as an argument of a callback
 * other events supported by SSP protocol like **slave_reset**, **read_note**, **credit_note**, **note_rejecting**, **note_stacking**, **disabled** et.c.
+
+Thanks to
+-------------------
+
+Contributors:
+
+* [Olexandr Vandalko](https://github.com/Vandalko)

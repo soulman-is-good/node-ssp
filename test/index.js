@@ -78,5 +78,5 @@ process.on('uncaughtException', function (err) {
 });
 
 process.on('exit', function () {
-  ssp.disable();
+  ssp.port && ssp.port.isOpened && ssp.disable();
 });

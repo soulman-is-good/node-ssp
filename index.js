@@ -67,7 +67,7 @@ var SSPInstance = Class.extend({
           self.emit('error', err || new Error("No devices found"));
         } else {
           for(var i in ports) {
-            if(ports[i].vendorId === '0x191c' || ports[i].pnpId.indexOf('Innovative_Technology') > -1) {
+            if(ports[i].vendorId === '0x191c' || (ports[i].pnpId && ports[i].pnpId.indexOf('Innovative_Technology') > -1)) {
               options.device = ports[i].comName;
               //TODO: device autodetection
             }

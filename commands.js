@@ -88,7 +88,9 @@ var Commands = Class.extend({
       var buf = new Buffer(this.exec_stack.shift()), self = this;
       this.client.write(buf, function () {
         self.client.drain(function () {
-          self.exec(cb);
+          setTimeout(function() {
+            self.exec(cb);
+          }, 100);
         });
       });
     }

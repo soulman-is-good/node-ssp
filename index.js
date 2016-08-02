@@ -33,7 +33,7 @@ var SSPInstance = Class.extend({
     var wait = function () {
       self.pollID = setTimeout(function () {
         commands.exec("poll", wait);
-      }, 500);
+      }, 400);
     };
     commands.exec("enable", function () {
       cb && cb();
@@ -93,6 +93,7 @@ var SSPInstance = Class.extend({
       self.port = port;
       commands = self.commands = new Commands(port, options.type, options.sspID, options.sequence);
       port.on('close', function () {
+        port.isOpened = false;
         self.emit('close');
       });
       port.on('error', function (err) {
@@ -106,7 +107,7 @@ var SSPInstance = Class.extend({
           var low = self.options.currencies.reduce(function (p, c, i) {
             return c === 1 ? p += Math.pow(2, i) : p;
           }, 0);
-          commands.sync().enable_higher_protocol()
+          commands.reset().sync().enable_higher_protocol()
             .set_channel_inhibits(low, 0x00);
           if (enableOnInit) {
             cb && cb();

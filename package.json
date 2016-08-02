@@ -1,6 +1,6 @@
 {
   "name": "ssp",
-  "version": "0.0.9",
+  "version": "0.1.1",
   "description": "Smiley Secure Protocol, node.js implementation",
   "main": "index.js",
   "directories": {
@@ -30,6 +30,6 @@
   },
   "homepage": "https://github.com/soulman-is-good/node-ssp",
   "dependencies": {
-    "serialport": "^1.4.6"
+    "serialport": "^3.0.0"
   }
 }

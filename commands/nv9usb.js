@@ -17,7 +17,7 @@ module.exports = {
     "channel_security_data":0x0f,
     "channel_reteach_data":0x10,
     "sync":function(){
-      this.sequence = 0x00;
+      this.sequence = 0x80;
       return 0x11;
     },
     "enable_higher_protocol":0x13,

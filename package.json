@@ -1,6 +1,6 @@
 {
   "name": "ssp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Smiley Secure Protocol, node.js implementation",
   "main": "index.js",
   "directories": {

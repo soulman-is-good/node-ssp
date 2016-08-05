@@ -64,15 +64,15 @@ var SSPInstance = Class.extend({
       cb = enableOnInit;
       enableOnInit = false;
     }
-    if (this.port && this.port.isOpened) {
+    cb = cb || function(){};
+    if (this.port && this.port.isOpen()) {
       this.port.close(function () {
-        self.port.isOpened = false;
         initializeDevice();
       });
     } else if(!options.device) {
-      serialport.list(function(err, ports){
+      serialport.list(function(err, ports) {
         if(err || ports.length === 0) {
-          self.emit('error', err || new Error("No devices found"));
+          cb(err || new Error("No devices found"));
         } else {
           for(var i in ports) {
             if(ports[i].vendorId === '0x191c' || (ports[i].pnpId && ports[i].pnpId.indexOf('Innovative_Technology') > -1)) {
@@ -81,7 +81,7 @@ var SSPInstance = Class.extend({
             }
           }
           if(!options.device) {
-            self.emit('error', new Error("Device not found, try define manually"));
+            cb(new Error("Device not found, try define manually"));
           } else {
             initializeDevice();
           }
@@ -101,7 +101,6 @@ var SSPInstance = Class.extend({
       self.port = port;
       commands = self.commands = new Commands(port, options.type, options.sspID, options.sequence);
       port.on('close', function () {
-        port.isOpened = false;
         self.emit('close');
       });
       port.on('error', function (err) {
@@ -115,7 +114,7 @@ var SSPInstance = Class.extend({
             if (buf.data) {
               buf = buf.data;
             }
-            data = buf.slice(3, buffer[2]);
+            data = buf.slice(3, 3 + buffer[2]);
             crc = self.commands.CRC16(buf.slice(1, buf[2] + 3));
             if(buf[buf.length - 2] !== crc[0] && buf[buf.length - 1] !== crc[1]) {
               self.emit('error', new Error('Wrong CRC from validator'), buffer, crc);
@@ -351,7 +350,6 @@ var SSPInstance = Class.extend({
         if (err) {
           self.emit('error', err);
         } else {
-          port.isOpened = true;
           var low = self.options.currencies.reduce(function (p, c, i) {
             return c === 1 ? p += Math.pow(2, i) : p;
           }, 0);

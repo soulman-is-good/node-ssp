@@ -20,7 +20,7 @@ var SSPInstance = Class.extend({
       currencies: opts.currencies || [1, 0, 1],
       type: opts.type || "nv10usb",
       sspID: opts.sspID || 0,
-      seqence: opts.sequence || 0x80
+      sequence: opts.sequence || 0x80
     };
     if (fs.readdirSync(__dirname + '/commands').map(function (item) {
       return item.replace(/\..+$/, '');
